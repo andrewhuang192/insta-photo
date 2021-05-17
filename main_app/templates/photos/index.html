@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Photo List</h1>
+
+{% for photo in photos %}
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ photo.name }}</span>
+      <p>Category: {{ photo.category }}</p>
+      <p>Description: {{ photo.description }}</p>
+      {% if photo.age > 0 %}
+        <p>Days Posted: {{ photo.age }}</p>
+      {% else %}
+        <p>Days Posted: New Photo</p>
+      {% endif %}
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
