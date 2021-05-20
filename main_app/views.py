@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 from .models import Photo, Tag
 from .forms import CommentForm
 
@@ -58,3 +59,24 @@ def assoc_tag(request, photo_id, tag_id):
 def delete_tag(request, photo_id, tag_id):
   Photo.objects.get(id=photo_id).tags.remove(tag_id)
   return redirect('detail', photo_id=photo_id)
+
+class TagList(ListView):
+    model = Tag
+
+class TagDetail(DetailView):
+    model = Tag
+
+
+class TagCreate(CreateView):
+    model = Tag
+    fields = '__all__'
+
+
+class TagUpdate(UpdateView):
+    model = Tag
+    fields = ['name', 'color']
+
+
+class TagDelete(DeleteView):
+    model = Tag
+    success_url = '/tags/'
